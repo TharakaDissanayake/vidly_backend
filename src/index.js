@@ -1,8 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "../config/.env" });
+const genresAPI = require("./routes/genresAPI");
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use("/api/genres", genresAPI);
 
 mongoose
   .connect(process.env.CONNECTION_URI)
